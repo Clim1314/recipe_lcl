@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thirty easy, beginner-proof Asian recipes with clear steps and practical cooking tips.">
+  <title>{% block title %}Wok & Spoon{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="Wok and Spoon home"><span>Wok</span> & Spoon</a>
+    <nav aria-label="Main navigation">
+      <a href="{{ url_for('recipes') }}">All recipes</a>
+      <a href="{{ url_for('recipes', cuisine='Thai') }}">Thai favourites</a>
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>
+    <p class="brand"><span>Wok</span> & Spoon</p>
+    <p>Good food. Clear steps. Zero panic.</p>
+    <p>30 recipes made for first-time cooks.</p>
+  </footer>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>

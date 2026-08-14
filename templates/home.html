@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Wok & Spoon — Asian cooking made simple{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Asian cooking, minus the guesswork</p>
+    <h1>Cook something <em>brilliant</em> tonight.</h1>
+    <p class="hero-intro">Thirty popular Asian recipes written for real kitchens, busy evenings, and people who need every step to actually make sense.</p>
+    <form class="hero-search" action="{{ url_for('recipes') }}" role="search">
+      <label class="sr-only" for="home-search">Search recipes</label>
+      <input id="home-search" name="q" placeholder="Try “chicken” or “noodles”">
+      <button type="submit">Find a recipe</button>
+    </form>
+    <div class="hero-stats"><span><strong>30</strong> easy recipes</span><span><strong>10</strong> Thai favourites</span><span><strong>0</strong> mystery steps</span></div>
+  </div>
+  <a class="hero-image" href="{{ url_for('recipe_detail', slug='pad-thai') }}">
+    <img src="{{ url_for('static', filename='images/pad-thai.jpg') }}" alt="A bowl of colourful pad Thai noodles">
+    <span class="hero-card"><small>Tonight's pick · 30 min</small><strong>Foolproof Pad Thai</strong></span>
+  </a>
+</section>
+
+<section class="quick-links" aria-label="Browse shortcuts">
+  <a href="{{ url_for('recipes', speed='under-30') }}"><span>⚡</span><strong>Under 30 minutes</strong><small>Fast food, the homemade kind</small></a>
+  <a href="{{ url_for('recipes', cuisine='Thai') }}"><span>🌶️</span><strong>Thai favourites</strong><small>Ten takeaway heroes</small></a>
+  <a href="{{ url_for('recipes', q='one-pot') }}"><span>🍲</span><strong>Less washing up</strong><small>One-pot comfort food</small></a>
+</section>
+
+<section class="section-wrap">
+  <div class="section-heading"><div><p class="eyebrow">Start here</p><h2>Most-loved recipes</h2></div><a href="{{ url_for('recipes') }}">See all 30 →</a></div>
+  <div class="recipe-grid">
+    {% for recipe in featured %}{% include '_card.html' %}{% endfor %}
+  </div>
+</section>
+
+<section class="confidence-banner">
+  <div><p class="eyebrow">The Wok & Spoon promise</p><h2>Recipes that don’t skip the obvious.</h2></div>
+  <p>We tell you how hot the pan should be, what “done” looks like, and what can go wrong—because good instructions should feel like a calm friend cooking beside you.</p>
+</section>
+{% endblock %}

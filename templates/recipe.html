@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ recipe.name }} — Wok & Spoon{% endblock %}
+{% block content %}
+<article class="recipe-page">
+  <div class="recipe-hero">
+    <div class="recipe-hero-copy">
+      <a class="back" href="{{ url_for('recipes') }}">← All recipes</a>
+      <p class="eyebrow">{{ recipe.cuisine }} · {{ recipe.difficulty }}</p>
+      <h1>{{ recipe.name }}</h1>
+      <p>{{ recipe.description }}</p>
+      <div class="recipe-meta"><span><small>Total time</small><strong>{{ recipe.minutes }} min</strong></span><span><small>Serves</small><strong>{{ recipe.servings }}</strong></span><span><small>Difficulty</small><strong>{{ recipe.difficulty }}</strong></span></div>
+    </div>
+    <img src="{{ url_for('static', filename=recipe.image) }}" alt="A finished serving of {{ recipe.name }}">
+  </div>
+  <div class="cook-layout">
+    <aside class="ingredients"><p class="eyebrow">Get ready</p><h2>Ingredients</h2><p class="serving-note">For {{ recipe.servings }} generous servings</p><ul>{% for ingredient in recipe.ingredients %}<li><label><input type="checkbox"><span>{{ ingredient }}</span></label></li>{% endfor %}</ul></aside>
+    <section class="method"><p class="eyebrow">Let’s cook</p><h2>Step by step</h2><ol>{% for step in recipe.steps %}<li><button class="step-toggle" type="button" aria-label="Mark step {{ loop.index }} complete"><span>{{ loop.index }}</span></button><p>{{ step }}</p></li>{% endfor %}</ol><div class="tip"><span>Read this first</span><strong>Idiot-proof tip</strong><p>{{ recipe.tip }}</p></div></section>
+  </div>
+</article>
+{% if related %}<section class="section-wrap related"><div class="section-heading"><div><p class="eyebrow">Keep cooking</p><h2>More {{ recipe.cuisine }} ideas</h2></div></div><div class="recipe-grid">{% for recipe in related %}{% include '_card.html' %}{% endfor %}</div></section>{% endif %}
+{% endblock %}

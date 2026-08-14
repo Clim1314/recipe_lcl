@@ -1,0 +1,11 @@
+<article class="recipe-card">
+  <a class="card-image" href="{{ url_for('recipe_detail', slug=recipe.slug) }}">
+    <img src="{{ url_for('static', filename=recipe.image) }}" alt="{{ recipe.name }}" loading="lazy">
+    <span>{{ recipe.minutes }} min</span>
+  </a>
+  <div class="card-body">
+    <p>{{ recipe.cuisine }} · {{ recipe.difficulty }}</p>
+    <h3><a href="{{ url_for('recipe_detail', slug=recipe.slug) }}">{{ recipe.name }}</a></h3>
+    <p>{{ recipe.description }}</p>
+  </div>
+</article>

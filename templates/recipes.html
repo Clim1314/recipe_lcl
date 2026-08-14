@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}All easy Asian recipes — Wok & Spoon{% endblock %}
+{% block content %}
+<section class="catalog-head"><p class="eyebrow">The full collection</p><h1>Find your next favourite.</h1><p>Popular dishes, everyday ingredients, and instructions you can trust.</p></section>
+<section class="catalog section-wrap">
+  <form class="filters" method="get">
+    <label>Search<input name="q" value="{{ query }}" placeholder="Dish or ingredient"></label>
+    <label>Cuisine<select name="cuisine"><option value="all">All cuisines</option>{% for cuisine in cuisines %}<option value="{{ cuisine|lower }}" {% if selected_cuisine == cuisine|lower %}selected{% endif %}>{{ cuisine }}</option>{% endfor %}</select></label>
+    <label>Cooking time<select name="speed"><option value="all">Any time</option><option value="under-30" {% if selected_speed == 'under-30' %}selected{% endif %}>30 minutes or less</option></select></label>
+    <button type="submit">Show recipes</button>
+  </form>
+  <div class="results-line"><strong>{{ recipes|length }}</strong> recipes found{% if query %} for “{{ query }}”{% endif %}</div>
+  {% if recipes %}<div class="recipe-grid">{% for recipe in recipes %}{% include '_card.html' %}{% endfor %}</div>{% else %}<div class="empty"><h2>No recipes found</h2><p>Try a broader search, such as “rice”, “chicken”, or “noodles”.</p><a class="button" href="{{ url_for('recipes') }}">Clear filters</a></div>{% endif %}
+</section>
+{% endblock %}
